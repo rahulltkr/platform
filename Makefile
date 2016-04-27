@@ -29,7 +29,7 @@ BUILD_WEBAPP_DIR = ./webapp
 # Golang Flags
 GOPATH ?= $(GOPATH:)
 GOFLAGS ?= $(GOFLAGS:)
-GO=$(GOPATH)/bin/godep go
+GO=/home/travis/gopath/src/github.com/sarahulltkr/platform/bin/godep go
 GO_LINKER_FLAGS ?= -ldflags \
 				   "-X github.com/mattermost/platform/model.BuildNumber=$(BUILD_NUMBER)\
 				    -X 'github.com/mattermost/platform/model.BuildDate=$(BUILD_DATE)'\
@@ -61,7 +61,7 @@ start-docker:
 
 	@if [ $(shell docker ps -a | grep -ci mattermost-postgres) -eq 0 ]; then \
 		echo starting mattermost-postgres; \
-		docker run --name mattermost-postgres -p 5432:5432 -e POSTGRES_USER=mmuser -e POSTGRES_PASSWORD=mostest \
+		docker run --name mattermost-postgres -p 5433:5432 -e POSTGRES_USER=mmuser -e POSTGRES_PASSWORD=mostest \
 		-d postgres:9.4 > /dev/null; \
 	elif [ $(shell docker ps | grep -ci mattermost-postgres) -eq 0 ]; then \
 		echo restarting mattermost-postgres; \
@@ -182,7 +182,7 @@ endif
 
 build-linux: .prebuild prepare-enterprise
 	@echo Build Linux amd64
-	env GOOS=linux GOARCH=amd64 $(GO) install $(GOFLAGS) $(GO_LINKER_FLAGS) ./...
+	env GOOS=linux GOARCH=amd64 /home/travis/gopath/src/github.com/sarahulltkr/platform/bin/godep go install $(GOFLAGS) $(GO_LINKER_FLAGS) ./...
 
 build-osx: .prebuild prepare-enterprise
 	@echo Build OSX amd64
