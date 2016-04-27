@@ -12,3 +12,11 @@ script:
   - make build-client
   - make build-linux
 
+install:
+  - go get github.com/mattermost/platform/api
+  - go get github.com/mattermost/platform/einterfaces
+  - go get github.com/mattermost/platform/manualtesting
+  - go get github.com/mattermost/platform/model
+  - go get github.com/mattermost/platform/store
+  - go get github.com/mattermost/platform/utils
+  - go get github.com/mattermost/platform/web
