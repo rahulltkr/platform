@@ -15,20 +15,11 @@
         font-size: 1em;
     }
 
-    .sidebar--left .team__header .user__picture,
-    .sidebar--menu .team__header .user__picture {
-        display: none;
-    }
-
     .date-separator.hovered--before:after,
     .date-separator.hovered--after:before,
     .new-separator.hovered--after:before,
     .new-separator.hovered--before:after {
         background: none !important;
-    }
-
-    .channel-intro {
-        margin: 0 15px 35px;
     }
 
     .post {
@@ -44,27 +35,6 @@
                 content: '...';
                 font-size: 20px;
                 top: -3px;
-            }
-        }
-
-        .post__content {
-            padding: 0 10px 0 0;
-        }
-
-        .post__header {
-            margin-bottom: 0;
-
-            .col__reply {
-                top: 0;
-                width: 65px;
-            }
-
-            .col__name {
-                pointer-events: none;
-
-                .user-popover {
-                    max-width: 130px;
-                }
             }
         }
 
@@ -93,7 +63,7 @@
         }
 
         .post__body {
-            width: 100%;
+            width: calc(100% - 75px);
         }
 
         .post__reply {
@@ -105,18 +75,22 @@
             }
         }
 
-        &.other--root {
-            &.post--comment {
-                .post__header {
-                    .col__reply {
-                        top: 0;
-                    }
-                }
+        &.other--root .post__reply {
+            &.post__reply--hide {
+                visibility: hidden;
+            }
+        }
+
+        .post__header {
+            .col__reply {
+                width: 65px;
             }
 
-            .post__reply {
-                &.post__reply--hide {
-                    visibility: hidden;
+            .col__name {
+                pointer-events: none;
+
+                .user-popover {
+                    max-width: 130px;
                 }
             }
         }
@@ -125,15 +99,6 @@
             &.same--user {
                 .post__time {
                     display: none;
-                }
-
-                .post__header {
-                    height: auto;
-                    margin-top: 5px;
-
-                    .col__name {
-                        display: inline-block;
-                    }
                 }
             }
         }
@@ -749,6 +714,10 @@
         width: 100%;
         z-index: 5;
 
+        &.move--left {
+            @include translate3d(0, 0, 0);
+        }
+
         .sidebar__collapse,
         .sidebar__search-icon {
             display: block;
@@ -797,11 +766,10 @@
 
         &.move--left-small {
             @include translate3d(-290px, 0, 0);
-
             &:before {
-                background-color: rgba(0, 0, 0, 0.4);
-                transition: background-color 0.5s ease;
                 z-index: 9999;
+                transition: background-color 0.5s ease;
+                background-color: rgba(0, 0, 0, 0.4);
             }
         }
 
@@ -809,12 +777,6 @@
             margin: 0;
             @include translate3d(-100%, 0, 0);
         }
-    }
-
-    .integration-option {
-        height: auto;
-        margin-left: 0;
-        width: 100%;
     }
 
     .app__content {
@@ -922,6 +884,10 @@
         .add-integrations-link {
             float: none;
         }
+    }
+
+    .add-integration {
+        width: 100%;
     }
 
     .backstage-list__item {

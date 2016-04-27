@@ -14,7 +14,7 @@ const holders = defineMessages({
     },
     search: {
         id: 'filtered_user_list.search',
-        defaultMessage: 'Search members'
+        defaultMessage: 'Search footprint  members'
     }
 });
 

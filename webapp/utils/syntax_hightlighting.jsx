@@ -124,67 +124,56 @@ hlJS.registerLanguage('yaml', hljsYaml);
 const HighlightedLanguages = Constants.HighlightedLanguages;
 
 export function formatCode(lang, data, filename) {
-    const language = lang.toLowerCase() || '';
-    let contents;
-    let header = '';
+    var language = lang || '';
+    var parsed;
+    var header = '';
+
+    language = language.toLowerCase();
 
     if (HighlightedLanguages[language]) {
-        let name = HighlightedLanguages[language].name;
+        var name = HighlightedLanguages[language].name;
 
         if (filename) {
             const fname = decodeURIComponent(Utils.getFileName(filename));
             name = fname + ' - ' + name;
         }
 
-        header = '<span class="post-code__language">' + name + '</span>';
+        header = '<span class="post-body--code__language">' + name + '</span>';
 
         try {
-            contents = hlJS.highlight(language, data).value;
+            parsed = hlJS.highlight(language, data).value;
         } catch (e) {
-            contents = TextFormatting.sanitizeHtml(data);
+            parsed = TextFormatting.sanitizeHtml(data);
         }
     } else {
-        contents = TextFormatting.sanitizeHtml(data);
+        parsed = TextFormatting.sanitizeHtml(data);
     }
 
-    let className = 'post-code';
-    if (!language) {
-        // wrap when no language is specified
-        className += ' post-code--wrap';
-    }
-
-    if (filename) {
-        // add line numbers when viewing a code file preview
-        const lines = data.match(/\r\n|\r|\n|$/g).length;
-        let strlines = '';
-        for (let i = 1; i <= lines; i++) {
-            if (strlines) {
-                strlines += '\n' + i;
-            } else {
-                strlines += i;
-            }
+    const lines = data.match(/\r\n|\r|\n|$/g).length;
+    var strlines = '';
+    for (var i = 1; i <= lines; i++) {
+        if (strlines) {
+            strlines += '\n' + i;
+        } else {
+            strlines += i;
         }
-
-        contents = (
-            '<table>' +
-                '<tbody>' +
-                    '<tr>' +
-                        '<td class="post-code__lineno">' + strlines + '</td>' +
-                        '<td>' +
-                            contents +
-                        '</td>' +
-                    '</tr>' +
-                '</tbody>' +
-            '</table>'
-        );
     }
 
     return (
-        '<div class="' + className + '">' +
+        '<div class="post-body--code">' +
             header +
             '<pre>' +
                 '<code class="hljs">' +
-                    contents +
+                    '<table>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td class="post-body--code__lineno">' + strlines + '</td>' +
+                                '<td>' +
+                                    parsed +
+                                '</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>' +
                 '</code>' +
             '</pre>' +
         '</div>'

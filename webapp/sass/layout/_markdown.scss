@@ -21,7 +21,7 @@
     }
 }
 
-.post-code {
+.post-body--code {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
@@ -32,6 +32,7 @@
         margin: 0;
         padding: 0px;
         text-align: left;
+        white-space: nowrap;
     }
 
     code {
@@ -44,16 +45,12 @@
         vertical-align: top;
     }
 
-    &:hover .post-code__language {
+    &:hover .post-body--code__language {
         @include opacity(1);
-    }
-
-    &--wrap code {
-        white-space: pre-wrap;
     }
 }
 
-.post-code__language {
+.post-body--code__language {
     @include opacity(0);
     @include translate3d(0, 0, 0);
     background: #21586d;
@@ -70,7 +67,7 @@
     z-index: 5;
 }
 
-.post-code__lineno {
+.post-body--code__lineno {
     border-right: 1px solid #aaa;
     color: #aaa;
     margin-right: .5em;
@@ -90,6 +87,10 @@
         height: 4px;
         margin: 15px 0 16px;
         padding: 0;
+    }
+
+    code {
+        white-space: pre;
     }
 
     .codespan__pre-wrap {

@@ -141,7 +141,14 @@ func (us SqlUserStore) Update(user *model.User, allowActiveUpdate bool) StoreCha
 			}
 
 			if user.Username != oldUser.Username {
-				user.UpdateMentionKeysFromUsername(oldUser.Username)
+				nonUsernameKeys := []string{}
+				splitKeys := strings.Split(user.NotifyProps["mention_keys"], ",")
+				for _, key := range splitKeys {
+					if key != oldUser.Username && key != "@"+oldUser.Username {
+						nonUsernameKeys = append(nonUsernameKeys, key)
+					}
+				}
+				user.NotifyProps["mention_keys"] = strings.Join(nonUsernameKeys, ",") + "," + user.Username + ",@" + user.Username
 			}
 
 			if count, err := us.GetMaster().Update(user); err != nil {

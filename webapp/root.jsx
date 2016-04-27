@@ -10,7 +10,7 @@ import 'sass/styles.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IndexRedirect, Router, Route, IndexRoute, Redirect, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, Redirect, browserHistory} from 'react-router';
 import Root from 'components/root.jsx';
 import LoggedIn from 'components/logged_in.jsx';
 import HeaderFooterTemplate from 'components/header_footer_template.jsx';
@@ -88,7 +88,7 @@ function preRenderSetup(callwhendone) {
         });
 
         if (window.mm_config && window.mm_config.EnableDeveloper === 'true') {
-            window.ErrorStore.storeLastError({type: 'developer', message: 'DEVELOPER MODE: A javascript error has occured.  Please use the javascript console to capture and report the error (row: ' + line + ' col: ' + column + ').'});
+            window.ErrorStore.storeLastError({message: 'DEVELOPER MODE: A javascript error has occured.  Please use the javascript console to capture and report the error (row: ' + line + ' col: ' + column + ').'});
             window.ErrorStore.emitChange();
         }
     };
@@ -134,7 +134,7 @@ function preNeedsTeam(nextState, replace, callback) {
     var team = TeamStore.getByName(teamName);
 
     if (!team) {
-        browserHistory.push('/');
+        browserHistory.push('/error');
         return;
     }
 
@@ -307,7 +307,6 @@ function renderRootComponent() {
                         component={NeedsTeam}
                         onEnter={preNeedsTeam}
                     >
-                        <IndexRedirect to='channels/town-square'/>
                         <Route
                             path='channels/:channel'
                             onEnter={onChannelEnter}

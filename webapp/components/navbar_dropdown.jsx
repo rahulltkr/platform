@@ -191,7 +191,7 @@ export default class NavbarDropdown extends React.Component {
             );
         }
 
-        if (this.state.teamMembers && this.state.teamMembers.length > 1) {
+        if (this.state.teamMembers && this.state.teamMembers.length > 0) {
             teams.push(
                 <li
                     key='teamDiv'

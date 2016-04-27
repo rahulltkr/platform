@@ -66,10 +66,6 @@ export function initialize() {
                 console.log('websocket closed'); //eslint-disable-line no-console
             }
 
-            if (manuallyClosed) {
-                return;
-            }
-
             connectFailCount = connectFailCount + 1;
 
             if (connectFailCount > MAX_WEBSOCKET_FAILS) {
@@ -79,12 +75,14 @@ export function initialize() {
             ErrorStore.setConnectionErrorCount(connectFailCount);
             ErrorStore.emitChange();
 
-            setTimeout(
-                () => {
-                    initialize();
-                },
-                WEBSOCKET_RETRY_TIME
-            );
+            if (!manuallyClosed) {
+                setTimeout(
+                    () => {
+                        initialize();
+                    },
+                    WEBSOCKET_RETRY_TIME
+                );
+            }
         };
 
         conn.onerror = (evt) => {
@@ -163,7 +161,6 @@ export function sendMessage(msg) {
 
 export function close() {
     manuallyClosed = true;
-    connectFailCount = 0;
     if (conn && conn.readyState === WebSocket.OPEN) {
         conn.close();
     }

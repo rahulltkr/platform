@@ -520,10 +520,6 @@ body.ios {
         }
     }
 
-    .post__header--info {
-        padding: 0;
-    }
-
     span {
         p:last-child {
             margin-bottom: .5em;
@@ -557,6 +553,16 @@ body.ios {
                 .col__reply {
                     top: 6px;
                 }
+            }
+
+            .post__time {
+                @include opacity(0);
+                font-size: 11px;
+                left: -7px;
+                line-height: 37px;
+                position: absolute;
+                text-rendering: auto;
+                top: -2px;
             }
         }
 
@@ -604,10 +610,10 @@ body.ios {
     .post__content {
         display: table;
         margin: 0 auto;
-        padding: 0 15px;
         position: relative;
         table-layout: fixed;
         width: 100%;
+        padding: 0 15px;
 
         > div {
             display: table-cell;
@@ -643,7 +649,7 @@ body.ios {
 
         .col__reply {
             position: absolute;
-            right: 10px;
+            right: 0;
             top: 30px;
             white-space: nowrap;
             width: 65px;

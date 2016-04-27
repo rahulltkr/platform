@@ -1,13 +1,11 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
+import ReactDOM from 'react-dom';
 import {FormattedMessage} from 'react-intl';
-
-import * as Utils from 'utils/utils.jsx';
+import Chart from 'chart.js';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Chart from 'chart.js';
 
 export default class LineChart extends React.Component {
     constructor(props) {
@@ -21,13 +19,11 @@ export default class LineChart extends React.Component {
         this.initChart();
     }
 
-    componentDidUpdate(prevProps) {
-        if (!Utils.areObjectsEqual(prevProps.data, this.props.data) || !Utils.areObjectsEqual(prevProps.options, this.props.options)) {
-            if (this.chart) {
-                this.chart.destroy();
-            }
-            this.initChart();
+    componentDidUpdate() {
+        if (this.chart) {
+            this.chart.destroy();
         }
+        this.initChart();
     }
 
     componentWillUnmount() {

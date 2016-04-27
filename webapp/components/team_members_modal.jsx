@@ -55,15 +55,13 @@ export default class TeamMembersModal extends React.Component {
                 onHide={this.props.onHide}
             >
                 <Modal.Header closeButton={true}>
-                    <Modal.Title>
-                        <FormattedMessage
-                            id='team_member_modal.members'
-                            defaultMessage='{team} Members'
-                            values={{
-                                team: teamDisplayName
-                            }}
-                        />
-                    </Modal.Title>
+                    <FormattedMessage
+                        id='team_member_modal.members'
+                        defaultMessage='{team} Members'
+                        values={{
+                            team: teamDisplayName
+                        }}
+                    />
                 </Modal.Header>
                 <Modal.Body>
                     <MemberListTeam style={{maxHeight}}/>
