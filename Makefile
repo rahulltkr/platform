@@ -182,7 +182,7 @@ endif
 
 build-linux: .prebuild prepare-enterprise
 	@echo Build Linux amd64
-	env GOOS=linux GOARCH=amd64 /home/travis/gopath/src/github.com/sarahulltkr/platform/bin/godep go install $(GOFLAGS) $(GO_LINKER_FLAGS) ./...
+	env GOOS=linux GOARCH=amd64 /home/travis/gopath/src/github.com/rahulltkr/platform/bin/godep go install $(GOFLAGS) $(GO_LINKER_FLAGS) ./...
 
 build-osx: .prebuild prepare-enterprise
 	@echo Build OSX amd64
