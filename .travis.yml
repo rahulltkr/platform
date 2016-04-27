@@ -9,5 +9,6 @@ services:
   - docker
 
 script:
+  - make build-client
   - make build-linux
 
