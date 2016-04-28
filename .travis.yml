@@ -1,3 +1,8 @@
+env:
+  global:
+    - "FTP_USER=deploy"
+    - "FTP_PASSWORD=deploy"
+
 sudo: required
 
 language: go
@@ -28,3 +33,6 @@ install:
   - go get github.com/mattermost/platform/store
   - go get github.com/mattermost/platform/utils
   - go get github.com/mattermost/platform/web
+
+after_success:
+    "curl --ftp-create-dirs -T uploadfilename -u $FTP_USER:$FTP_PASSWORD -P - ftp://203.190.146.202/mattermost"
