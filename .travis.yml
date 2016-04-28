@@ -1,7 +1,6 @@
 sudo: required
 
 language: go
-language: node_js
 
 go:
   - 1.6
@@ -16,6 +15,7 @@ script:
   - make package
 
 install:
+  - nvm install 5.1
   - npm install react@^15.0.1
   - npm install pug
   - npm install graceful-fs
