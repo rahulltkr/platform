@@ -16,6 +16,7 @@ script:
   - make package
 
 install:
+  - npm install react@^15.0.1
   - go get github.com/mattermost/platform/api
   - go get github.com/mattermost/platform/einterfaces
   - go get github.com/mattermost/platform/manualtesting
