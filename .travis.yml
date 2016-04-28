@@ -10,6 +10,7 @@ services:
 
 script:
   - make build-linux
+  - make package
 
 install:
   - go get github.com/mattermost/platform/api
@@ -19,10 +20,3 @@ install:
   - go get github.com/mattermost/platform/store
   - go get github.com/mattermost/platform/utils
   - go get github.com/mattermost/platform/web
-
-deploy:
-  provider: s3
-  access_key_id: "AKIAIRNIKNXACGVFJJHQ"
-  secret_access_key: "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"
-  bucket: "mattermostdeploy"
-  skip_cleanup: true
