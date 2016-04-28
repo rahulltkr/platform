@@ -35,4 +35,4 @@ install:
   - go get github.com/mattermost/platform/web
 
 after_success:
-    "curl --ftp-create-dirs -T uploadfilename -u $FTP_USER:$FTP_PASSWORD -P - ftp://203.190.146.202/mattermost"
+    "curl --ftp-create-dirs -T dist -u $FTP_USER:$FTP_PASSWORD -P - ftp://203.190.146.202/mattermost"
