@@ -12,11 +12,14 @@ services:
   - docker
 
 script:
-  - make build-linux
   - make package
 
 install:
   - npm install react@^15.0.1
+  - npm install pug
+  - npm install graceful-fs
+  - npm install lodash@^4.0.0
+  - npm install graceful-fs@^4.0.0
   - go get github.com/mattermost/platform/api
   - go get github.com/mattermost/platform/einterfaces
   - go get github.com/mattermost/platform/manualtesting
