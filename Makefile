@@ -29,7 +29,7 @@ BUILD_WEBAPP_DIR = ./webapp
 # Golang Flags
 GOPATH ?= $(GOPATH:)
 GOFLAGS ?= $(GOFLAGS:)
-GO=/home/travis/gopath/src/github.com/rahulltkr/platform/bin/godep go
+GO=$(GOPATH)/bin/godep go
 GO_LINKER_FLAGS ?= -ldflags \
 				   "-X github.com/mattermost/platform/model.BuildNumber=$(BUILD_NUMBER)\
 				    -X 'github.com/mattermost/platform/model.BuildDate=$(BUILD_DATE)'\
